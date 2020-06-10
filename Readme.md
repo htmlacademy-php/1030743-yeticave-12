@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Булат Карамышев](https://up.htmlacademy.ru/php/12/user/1030743).
-* Наставник: `Неизвестно`.
+* Наставник: [Максим Деев](https://htmlacademy.ru/profile/id685777).
 
 ---
 
