@@ -44,7 +44,7 @@ $announcements = [
 
 function bet_formatter ($bet) {
     $min_number = 1000;
-    if ($bet < $min_number) {
+    if ($bet <= $min_number) {
         return $bet = ceil($bet) . ' ₽';
     }
         return $bet = number_format($bet, '0', ',', ' ') . ' ₽';
