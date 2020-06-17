@@ -40,7 +40,16 @@ $announcements = [
         'price' => '5400',
         'picture-url' => 'img/lot-6.jpg'
     ]
-]
+];
+
+function bet_formatter ($bet) {
+    $min_number = 1000;
+    if ($bet < $min_number) {
+        return $bet = ceil($bet) . ' ₽';
+    }
+        return $bet = number_format($bet, '0', ',', ' ') . ' ₽';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -109,35 +118,35 @@ $announcements = [
         </div>
         <ul class="lots__list">
         <!--заполните этот список из массива с товарами-->
-        <?php foreach ($announcements as $key => $item): ?>
-            <li class="lots__item lot">
-                <div class="lot__image">
-                    <?php if ($item['picture-url']): ?>
-                        <img src="<?=$item['picture-url'];?>" width="350" height="260" alt="">
-                    <?php endif ?>
-                </div>
-                <div class="lot__info">
-                        <?php if ($item['category']): ?>
-                            <span class="lot__category"><?=$item['category'];?></span>
+            <?php foreach ($announcements as $key => $item): ?>
+                <li class="lots__item lot">
+                    <div class="lot__image">
+                        <?php if ($item['picture-url']): ?>
+                            <img src="<?=$item['picture-url'];?>" width="350" height="260" alt="">
                         <?php endif ?>
-                    <h3 class="lot__title">
-                        <?php if ($item['title']): ?>
-                            <a class="text-link" href="pages/lot.html"><?=$item['title'];?></a>
-                        <?php endif ?>
-                    </h3>
-                    <div class="lot__state">
-                        <div class="lot__rate">
-                            <span class="lot__amount">Стартовая цена</span>
-                            <?php if ($item['price']): ?>
-                                <span class="lot__cost"><?=$item['price'];?><b class="rub">р</b></span>
+                    </div>
+                    <div class="lot__info">
+                            <?php if ($item['category']): ?>
+                                <span class="lot__category"><?=$item['category'];?></span>
                             <?php endif ?>
-                        </div>
-                        <div class="lot__timer timer">
-                            12:23
+                        <h3 class="lot__title">
+                            <?php if ($item['title']): ?>
+                                <a class="text-link" href="pages/lot.html"><?=$item['title'];?></a>
+                            <?php endif ?>
+                        </h3>
+                        <div class="lot__state">
+                            <div class="lot__rate">
+                                <span class="lot__amount">Стартовая цена</span>
+                                <?php if ($item['price']): ?>
+                                    <span class="lot__cost"><?= bet_formatter($item['price']) ?></span>
+                                <?php endif ?>
+                            </div>
+                            <div class="lot__timer timer">
+                                12:23
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
+                </li>
             <?php endforeach; ?> 
         </ul>
     </section>
