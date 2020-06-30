@@ -19,29 +19,27 @@
         <?php foreach ($announcements as $key => $item): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <?php if ($item['picture-url']): ?>
-                        <img src="<?=$item['picture-url'];?>" width="350" height="260" alt="">
-                    <?php endif ?>
+                    <img src="<?=$item['picture-url'];?>" width="350" height="260" alt="">       
                 </div>
                 <div class="lot__info">
-                        <?php if ($item['category']): ?>
-                            <span class="lot__category"><?=$item['category'];?></span>
-                        <?php endif ?>
+                        <span class="lot__category"><?=$item['category'];?></span>            
                     <h3 class="lot__title">
-                        <?php if ($item['title']): ?>
-                            <a class="text-link" href="pages/lot.html"><?=$item['title'];?></a>
-                        <?php endif ?>
+                        <a class="text-link" href="pages/lot.html"><?=$item['title'];?></a>             
                     </h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <?php if ($item['price']): ?>
-                                <span class="lot__cost"><?= bet_formatter($item['price']) ?></span>
-                            <?php endif ?>
+                            <span class="lot__cost"><?= bet_formatter($item['price']) ?></span>                 
                         </div>
-                        <div class="lot__timer timer">
-                            12:23
-                        </div>
+                        <?php if (get_time_left('2020-07-0' . ($key + 1))[0] < 1): ?>
+                            <div class="lot__timer timer timer--finishing">
+                                <?= show_time_left(get_time_left('2020-07-0' . ($key + 1))); ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="lot__timer timer">
+                                <?= show_time_left(get_time_left('2020-07-0' . ($key + 1))); ?>
+                            </div>
+                        <?php endif ?>
                     </div>
                 </div>
             </li>
