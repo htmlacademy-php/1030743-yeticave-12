@@ -16,3 +16,4 @@ $layout = include_template('layout.php', [
 ]);
 
 print($layout);
+
