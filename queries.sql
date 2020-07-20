@@ -30,27 +30,27 @@ INSERT INTO bet (id, creation_date, bet_price, user_id, lot_id) VALUES
   (1, NOW(), '6000', 1, 3),
   (2, NOW(), '15000', 2, 5);
 
--- выбирает все записи из категорий
+-- получить все категории;
 
-SELECT * FROM category 
+SELECT * FROM category;
 
 -- получить самые новые, открытые лоты. Каждый лот должен включать название, 
---стартовую цену, ссылку на изображение, текущую цену, название категории
+-- стартовую цену, ссылку на изображение, текущую цену, название категории
 
-SELECT lot_name, start_price, category_id, category.id, bet.bet_price, image FROM lot 
+SELECT lot_name, start_price, end_date, category_id, category.name, bet.bet_price, image FROM lot 
 JOIN category ON lot.category_id = category.id 
-JOIN bet ON bet.id = lot.id
+JOIN bet ON bet.id = lot.id;
 
 -- показать лот по его id. Получите также название категории, к которой принадлежит лот
 
 SELECT lot.id, category.name FROM lot
 JOIN category ON lot.category_id = category.id;
 
-
---обновить название лота по его идентификатору
+-- обновить название лота по его идентификатору
 
 UPDATE lot SET lot_name = 'new name' WHERE id = 3;
 
---получить список ставок для лота по его идентификатору с сортировкой по дате
+-- получить список ставок для лота по его идентификатору с сортировкой по дате
+-- сортировкой по дате
 
 SELECT * FROM bet WHERE lot_id = 3 ORDER BY creation_date ASC;
