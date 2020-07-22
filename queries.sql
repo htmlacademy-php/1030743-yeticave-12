@@ -37,7 +37,7 @@ SELECT * FROM category;
 -- получить самые новые, открытые лоты. Каждый лот должен включать название, 
 -- стартовую цену, ссылку на изображение, текущую цену, название категории
 
-SELECT lot_name, start_price, end_date, category_id, category.name, bet.bet_price, image FROM lot 
+SELECT lot.id, lot_name, start_price, end_date, category_id, category.name, bet.bet_price, image FROM lot 
 JOIN category ON lot.category_id = category.id 
 JOIN bet ON bet.id = lot.id;
 

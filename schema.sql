@@ -2,10 +2,13 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jul 10, 2020 at 01:42 PM
--- Server version: 5.7.25
--- PHP Version: 7.3.9
+-- Хост: 127.0.0.1:3306
+-- Время создания: Июл 07 2020 г., 20:18
+-- Версия сервера: 5.7.25
+-- Версия PHP: 7.3.9
+
+
+CREATE DATABASE yeticave;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,27 +22,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `yeticave`
+-- База данных: `yeticave`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bet`
+-- Структура таблицы `bet`
 --
+
+USE yeticave;
 
 CREATE TABLE `bet` (
   `id` int(11) NOT NULL,
   `creation_date` timestamp NULL DEFAULT NULL,
   `bet_price` int(11) DEFAULT NULL,
-  `user_id` int(100) DEFAULT NULL,
-  `lot_id` int(100) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `lot_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Структура таблицы `category`
 --
 
 CREATE TABLE `category` (
@@ -51,7 +56,7 @@ CREATE TABLE `category` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lot`
+-- Структура таблицы `lot`
 --
 
 CREATE TABLE `lot` (
@@ -63,14 +68,15 @@ CREATE TABLE `lot` (
   `start_price` decimal(60,0) DEFAULT NULL,
   `end_date` timestamp NULL DEFAULT NULL,
   `bet_step` int(11) DEFAULT NULL,
-  `user_lot_add_id` int(100) DEFAULT NULL,
-  `user_winner_id` int(100) DEFAULT NULL,
-  `category_id` int(100) DEFAULT NULL
+  `user_lot_add_id` int(11) DEFAULT NULL,
+  `user_winner_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Структура таблицы `users`
 --
 
 CREATE TABLE `users` (
@@ -79,29 +85,29 @@ CREATE TABLE `users` (
   `name` text,
   `password` varchar(128) DEFAULT NULL,
   `user_contacts` text,
-  `lot_id` int(100) DEFAULT NULL,
-  `bet_id` int(100) DEFAULT NULL
+  `lot_id` int(11) DEFAULT NULL,
+  `bet_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `bet`
+-- Индексы таблицы `bet`
 --
 ALTER TABLE `bet`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `category`
+-- Индексы таблицы `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `characte_code` (`character_code`);
 
 --
--- Indexes for table `lot`
+-- Индексы таблицы `lot`
 --
 ALTER TABLE `lot`
   ADD PRIMARY KEY (`id`),
@@ -116,37 +122,38 @@ ALTER TABLE `lot`
   ADD KEY `ind_name` (`lot_name`);
 
 --
--- Indexes for table `users`
+-- Индексы таблицы `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `e_mail` (`email`),
   ADD UNIQUE KEY `pass` (`password`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `bet`
+-- AUTO_INCREMENT для таблицы `bet`
 --
 ALTER TABLE `bet`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `lot`
+-- AUTO_INCREMENT для таблицы `lot`
 --
 ALTER TABLE `lot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

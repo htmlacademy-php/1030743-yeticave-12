@@ -37,4 +37,15 @@ function show_time_left ($time) {
     return $time[0] . ':' . $time[1];
 };
 
+// подключает к бд
+function connect_to_db() {
+    $connection = mysqli_connect('yeticave', 'root', '', 'yeticave');
+    mysqli_set_charset($connection, "utf8");
+
+    if ($connection == false) {
+        print("Ошибка подключения: " . mysqli_connect_error());
+    }
+
+    return $connection;
+};
 
