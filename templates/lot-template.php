@@ -3,20 +3,20 @@
       <div class="lot-item__content">
         <div class="lot-item__left">
           <div class="lot-item__image">
-            <img src="../<?=$lot['image'];?>" width="730" height="548" alt="Сноуборд">
+            <img src="../<?=$lot['0']['image'];?>" width="730" height="548" alt="Сноуборд">
           </div>
-          <p class="lot-item__category">Категория: <span><?=$lot['name'];?></span></p>
-          <p class="lot-item__description"><?=$lot['lot_description'];?></p>
+          <p class="lot-item__category">Категория: <span><?=$lot['0']['name'];?></span></p>
+          <p class="lot-item__description"><?=$lot['0']['lot_description'];?></p>
         </div>
         <div class="lot-item__right">
           <div class="lot-item__state">
-            <?php if (get_time_left($lot['end_date'])[0] < 1): ?>
+            <?php if (get_time_left($lot['0']['end_date'])[0] < 1): ?>
               <div class="lot-item__timer timer timer--finishing">
-                  <?= show_time_left(get_time_left($lot['end_date'])); ?>
+                  <?= show_time_left(get_time_left($lot['0']['end_date'])); ?>
               </div>
               <?php else: ?>
               <div class="lot-item__timer timer">
-                  <?= show_time_left(get_time_left($lot['end_date'])); ?>
+                  <?= show_time_left(get_time_left($lot['0']['end_date'])); ?>
                 </div>
               <?php endif ?>
             <div class="lot-item__cost-state">
