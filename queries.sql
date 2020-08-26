@@ -18,7 +18,7 @@ INSERT INTO category (id, name, character_code) VALUES
   (5, 'Инструменты', 'tools'),
   (6, 'Разное', 'other');
 
--- добавляет данные в "ползователи"
+-- добавляет данные в "пользователи"
 
 INSERT INTO users (id, email, name, password, user_contacts, lot_id, bet_id) VALUES
   (1, 'vasyaNagibator11@mail.ru', 'Вася', 'vasya2010', '89642589741', 1, 1),

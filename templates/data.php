@@ -49,3 +49,15 @@ function connect_to_db() {
     return $connection;
 };
 
+// проверяет осталось чтобы осталось больше суток
+function is_time_left_24 ($current_time) {
+    $time_stamp = time();
+    $end_time_timestamp = strtotime($current_time);
+    $time_left = $end_time_timestamp - $time_stamp;
+  
+    if ($time_left < 86400) {
+      return false;
+    } else {
+      return true;
+    }
+  };
