@@ -63,7 +63,7 @@ CREATE TABLE `lot` (
   `id` int(11) NOT NULL,
   `creation_date` timestamp NULL DEFAULT NULL,
   `lot_name` varchar(100) DEFAULT NULL,
-  `lot_description` varchar(100) DEFAULT NULL,
+  `lot_description` varchar(255) DEFAULT NULL,
   `image` text,
   `start_price` decimal(60,0) DEFAULT NULL,
   `end_date` timestamp NULL DEFAULT NULL,
