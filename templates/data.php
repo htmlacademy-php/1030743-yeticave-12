@@ -49,7 +49,7 @@ function connect_to_db() {
     return $connection;
 };
 
-// проверяет осталось чтобы осталось больше суток
+// проверяет чтобы осталось больше суток до кокнчания аукциона
 function is_time_left_24 ($current_time) {
     $time_stamp = time();
     $end_time_timestamp = strtotime($current_time);
