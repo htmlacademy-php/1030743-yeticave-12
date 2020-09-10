@@ -1,6 +1,6 @@
 <?php
 require_once('helpers.php');
-require_once('templates/data.php');
+require_once('functions.php');
 
 $lot_id  = filter_input(INPUT_GET, 'id');
 $connection = connect_to_db();
@@ -30,9 +30,7 @@ if ($lot_id === $lot_description_list['id']) {
 $layout = include_template('layout.php', [
   'page_content' => $page_content,
   'category_list' => $category_list,
-  'page_title' => 'Yeti Cave',
-  'is_auth' => $is_auth, 
-  'user_name' => $user_name
+  'page_title' => 'Лот'
 ]);
 
 print($layout);
