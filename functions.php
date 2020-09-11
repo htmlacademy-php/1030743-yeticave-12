@@ -1,8 +1,8 @@
 <?php
 require_once('helpers.php');
 
-$is_auth = rand(0, 1);
-$user_name = 'Булат';
+// $is_auth = rand(0, 1);
+// $user_name = 'Булат';
 
 // форматирует ставку
 function bet_formatter ($bet) {
@@ -57,7 +57,8 @@ function is_time_left_24 ($current_time) {
   
     if ($time_left < 86400) {
       return false;
-    } else {
+    } 
       return true;
-    }
   };
+
+  session_start();
