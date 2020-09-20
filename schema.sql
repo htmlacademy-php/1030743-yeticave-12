@@ -70,7 +70,8 @@ CREATE TABLE `lot` (
   `bet_step` int(11) DEFAULT NULL,
   `user_lot_add_id` int(11) DEFAULT NULL,
   `user_winner_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL
+  `category_id` int(11) DEFAULT NULL,
+  FULLTEXT (lot_name, lot_description)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -114,7 +115,7 @@ ALTER TABLE `lot`
   ADD KEY `lot_index` (`lot_description`),
   ADD KEY `lot_index_desription` (`lot_description`),
   ADD KEY `lot_index_name` (`lot_name`),
-  ADD KEY `lot_name` (`lot_name`),
+  ADD KEY `lot_title` (`lot_name`),
   ADD KEY `index_desc` (`lot_description`),
   ADD KEY `index_name` (`lot_name`),
   ADD KEY `idesc` (`lot_description`),

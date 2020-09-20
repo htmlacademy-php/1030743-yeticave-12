@@ -14,7 +14,7 @@ $page_content = include_template('sign-up.php', [
   'category' => $category_list
   ]); 
 
-  if (isset($_SESSION['user'])) {
+  if (!isset($_SESSION['user'])) {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $form_data = $_POST;
