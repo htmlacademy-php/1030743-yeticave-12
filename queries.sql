@@ -22,13 +22,15 @@ INSERT INTO category (id, name, character_code) VALUES
 
 INSERT INTO users (id, email, name, password, user_contacts, lot_id, bet_id) VALUES
   (1, 'vasyaNagibator11@mail.ru', 'Вася', 'vasya2010', '89642589741', 1, 1),
-  (2, 'petyaBFG9000@mail.ru', 'Петя', 'iddqd', '89824778548', 2, 2);
+  (2, 'petyaBFG9000@mail.ru', 'Петя', 'iddqd', '89824778548', 2, 2),
+  (3, 'vasyaNag211ibator11@mail.ru', 'Петя', 'v23423410', '89596969741', 3, 3);
 
 -- добавляет данные в "ставку"
 
 INSERT INTO bet (id, creation_date, bet_price, user_id, lot_id) VALUES
   (1, NOW(), '6000', 1, 3),
-  (2, NOW(), '15000', 2, 5);
+  (2, NOW(), '8000', 3, 2),
+  (3, NOW(), '15000', 2, 5);
 
 -- получить все категории;
 
