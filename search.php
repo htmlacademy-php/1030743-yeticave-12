@@ -5,9 +5,7 @@ require_once('functions.php');
 $connection = connect_to_db();
 
 if ($connection) {
-  $sql_category_list = 'SELECT name, id FROM category';
-  $result_category_list = mysqli_query($connection, $sql_category_list);
-  $category_list = mysqli_fetch_all($result_category_list, MYSQLI_ASSOC);
+  $category_list = category_list($connection);
 };
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -15,25 +13,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // получения заголовка поискового запроса
   $search_headers = $_GET['search'] ?? '';
 
+  $cur_page = $_GET['page'] ?? 1;
+  $page_items_limit = 9;
 
+  // запрос в бд для получения количества найденных лотов
+  $sql_lot_count = "SELECT * FROM lot
+  JOIN category ON lot.category_id = category.id 
+  WHERE end_date > CURRENT_DATE() AND MATCH (lot_name, lot_description) AGAINST(?)";
+
+  $stmt = db_get_prepare_stmt($connection, $sql_lot_count, [$search_headers]);
+  mysqli_stmt_execute($stmt);
+  $lot_count_res = mysqli_stmt_get_result($stmt);
+  $lot_count = mysqli_num_rows($lot_count_res);
+
+  // формула расчета показа пагинации
+  $pages_count = ceil($lot_count / $page_items_limit);
+  $offset = ($cur_page - 1) * $page_items_limit;
+
+  $pages = range(1, $pages_count);
+
+  // запрос в бд для получения количества найденных лотов со смещением
   if ($search_headers) {
     $sql_search = "SELECT * FROM lot
-    JOIN category ON lot.category_id = category.id 
-    WHERE MATCH (lot_name, lot_description) AGAINST(?)";
+    WHERE end_date > CURRENT_DATE() AND MATCH (lot_name, lot_description) AGAINST(?)
+    LIMIT $page_items_limit OFFSET $offset";
     $stmt = db_get_prepare_stmt($connection, $sql_search, [$search_headers]);
-    $stmt_execute = mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $search_result = mysqli_fetch_all($result, MYSQLI_ASSOC);
   }
-
-  print_r($search_result);
 }
-
 
 $page_content = include_template('search-lot.php', [
   'category' => $category_list,
   'lots' => $search_result,
-  'search_headers' => $search_headers
+  'search_headers' => $search_headers,
+  'cur_page' => $cur_page,
+  'pages_count' => $pages_count,
+  'pages' => $pages
   ]); 
 
 $layout = include_template('layout.php', [

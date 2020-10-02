@@ -1,0 +1,46 @@
+<main>
+  <nav class="nav">
+    <ul class="nav__list container">
+      <?php foreach ($category as $key => $item): ?>
+        <li class="nav__item">
+          <a href="category.php?id=<?=$item['id'];?>"><?=$item['name'];?></a>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </nav>
+  <section class="rates container">
+    <h2>Мои ставки</h2>
+    <table class="rates__list">
+      <?php foreach ($my_bets as $key => $bet): ?>
+        <tr class="rates__item">
+          <td class="rates__info">
+            <div class="rates__img">
+              <img src="../<?=$bet['image'];?>" width="54" height="40" alt="Сноуборд">
+            </div>
+            <h3 class="rates__title"><a href="lot.php?id=<?=$bet['id'];?>"><?=$bet['lot_name'];?></a></h3>
+          </td>
+          <td class="rates__category">
+          <?=$bet['name'];?>
+          </td>
+          <td class="rates__timer">
+          <?php if (get_time_left($bet['end_date'])[0] < 1): ?>
+            <div class="timer timer--finishing">
+              <?= show_time_left(get_time_left($bet['end_date'])); ?>
+            </div>
+          <?php else: ?>
+            <div class="timer">
+              <?= show_time_left(get_time_left($bet['end_date'])); ?>
+            </div>
+          <?php endif ?>
+          </td>
+          <td class="rates__price">
+          <?=$bet['bet_price'];?>
+          </td>
+          <td class="rates__time">
+          <?= get_creation_date($bet['creation_date']);?>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+    </table>
+  </section>
+</main>
