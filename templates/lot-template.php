@@ -50,18 +50,24 @@
           </form>
         </div>
         <?php endif ?>
-        <div class="history">
-          <h3>История ставок (<span>10</span>)</h3>
-          <table class="history__list">
-            <?php foreach ($bets as $key => $item): ?>
-              <tr class="history__item">
-                <td class="history__name"><?=$item['name'];?></td>
-                <td class="history__price"><?=$item['bet_price'];?> р</td>
-                <td class="history__time"><?= get_creation_date($item['creation_date']);?></td>
-              </tr>
-            <?php endforeach; ?>
-          </table>
-        </div>
+        <?php if ($lot['bet_count'] > 0): ?>
+          <div class="history">
+            <h3>История ставок (<span><?=$lot['bet_count'];?></span>)</h3>
+            <table class="history__list">
+              <?php foreach ($bets as $key => $item): ?>
+                <tr class="history__item">
+                  <td class="history__name"><?=$item['name'];?></td>
+                  <td class="history__price"><?=$item['bet_price'];?> р</td>
+                  <td class="history__time"><?= get_creation_date($item['creation_date']);?></td>
+                </tr>
+              <?php endforeach; ?>
+            </table>
+          </div>
+        <?php else: ?>
+          <div class="history">
+            <h3>Ставок пока не было</h3>
+          </div>
+        <?php endif ?>
       </div>
     </div>
   </section>
