@@ -5,9 +5,7 @@ require_once('functions.php');
 $connection = connect_to_db();
 
 if ($connection) {
-  $sql_category_list = 'SELECT name, id FROM category';
-  $result_category_list = mysqli_query($connection, $sql_category_list);
-  $category_list = mysqli_fetch_all($result_category_list, MYSQLI_ASSOC);
+  $category_list = category_list($connection);
 };
 
 $page_content = include_template('add-lot.php', [

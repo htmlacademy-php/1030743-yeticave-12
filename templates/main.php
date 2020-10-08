@@ -6,7 +6,7 @@
         <!--заполните этот список из массива категорий-->
         <?php foreach ($category_list as $key => $item): ?>
             <li class="promo__item promo__item--<?=$item['character_code'];?>">
-                <a class="promo__link" href="pages/all-lots.html"><?=$item['name'];?></a>
+                <a class="promo__link" href="category.php?id=<?=$item['id'];?>"><?=$item['name'];?></a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -29,8 +29,14 @@
                     </h3>
                     <div class="lot__state">
                         <div class="lot__rate">
-                            <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?= bet_formatter($item['start_price']) ?></span>                 
+                            <?php if ($item['bet_price']): ?>
+                                <span class="lot__amount"><?=$item['bet_count'];?> <?=get_noun_plural_form($item['bet_count'], 'ставка', 'ставки', 'ставок');?></span>
+                                <span class="lot__cost"><?= bet_formatter($item['bet_price']) ?></span>  
+
+                            <?php else: ?>
+                                <span class="lot__amount">Стартовая цена</span>
+                                <span class="lot__cost"><?= bet_formatter($item['start_price']) ?></span>    
+                            <?php endif ?>             
                         </div>
                         <?php if (get_time_left($item['end_date'])[0] < 1): ?>
                             <div class="lot__timer timer timer--finishing">

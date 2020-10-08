@@ -18,7 +18,7 @@
                 <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
             </a>
             <form class="main-header__search" method="get" action="search.php" autocomplete="off">
-                <input type="search" name="search" placeholder="Поиск лота" value="<?=isset($_GET['search']) ? strval($_GET['search']) : ""; ?>">
+                <input type="search" name="search" placeholder="Поиск лота" value="<?=isset($_GET['search']) ? trim($_GET['search']) : ""; ?>">
                 <input class="main-header__search-btn" type="submit" name="find" value="Найти">
             </form>
             <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
@@ -29,7 +29,7 @@
             <?php if (isset($_SESSION['user'])): ?>
                 <div class="user-menu__logged">
                     <p><?=$_SESSION['user']['name'] ?></p>
-                    <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
+                    <a class="user-menu__bets" href="user-bets.php?id=<?= $_SESSION['user']['id']; ?>">Мои ставки</a>
                     <a class="user-menu__logout" href="logout.php">Выход</a>
                 </div>
             <?php else: ?>
@@ -56,8 +56,8 @@
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
             <?php foreach ($category_list as $key => $item): ?>
-                <li class="nav__item">
-                    <a href="pages/all-lots.html"><?=$item['name'];?></a>
+                <li class="nav__item <?=$item['name'] === $category_name ? "nav__item--current" : "";?>">
+                    <a href="category.php?id=<?=$item['id'];?>"><?=$item['name'];?></a>
                 </li>
             <?php endforeach; ?>
         </ul>
