@@ -1,6 +1,8 @@
 <?php
 require_once('helpers.php');
 require_once('functions.php');
+require_once('getwinner.php');
+require_once('vendor/autoload.php');
 
 $connection = connect_to_db();
 
@@ -15,8 +17,6 @@ if ($connection) {
 
   $result_new_lots = mysqli_query($connection, $sql_new_lots);
   $new_lots = mysqli_fetch_all($result_new_lots, MYSQLI_ASSOC);
-
-  print_r($new_lots);
 
   $category_list = category_list($connection);
 

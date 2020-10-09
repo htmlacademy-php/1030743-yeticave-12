@@ -85,9 +85,7 @@ CREATE TABLE `users` (
   `email` varchar(128) NOT NULL,
   `name` text,
   `password` varchar(128) DEFAULT NULL,
-  `user_contacts` text,
-  `lot_id` int(11) DEFAULT NULL,
-  `bet_id` int(11) DEFAULT NULL
+  `user_contacts` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

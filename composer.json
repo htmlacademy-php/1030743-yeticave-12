@@ -1,0 +1,8 @@
+{
+    "name": "yeticave/php-learn",
+    "type": "project",
+    "license": "mit",
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}
