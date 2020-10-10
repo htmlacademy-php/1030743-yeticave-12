@@ -64,7 +64,7 @@ function connect_to_db() {
     $connection = mysqli_connect('yeticave', 'root', '', 'yeticave');
     mysqli_set_charset($connection, "utf8");
 
-    if ($connection == false) {
+    if ($connection === false) {
         print("Ошибка подключения: " . mysqli_connect_error());
     }
 

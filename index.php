@@ -19,7 +19,6 @@ if ($connection) {
   $new_lots = mysqli_fetch_all($result_new_lots, MYSQLI_ASSOC);
 
   $category_list = category_list($connection);
-
 };
 
 $page_content = include_template('main.php', [

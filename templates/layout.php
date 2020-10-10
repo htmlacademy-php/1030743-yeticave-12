@@ -29,7 +29,7 @@
             <?php if (isset($_SESSION['user'])): ?>
                 <div class="user-menu__logged">
                     <p><?=$_SESSION['user']['name'] ?></p>
-                    <a class="user-menu__bets" href="user-bets.php?id=<?= $_SESSION['user']['id']; ?>">Мои ставки</a>
+                    <a class="user-menu__bets" href="user-bets.php?id=<?= htmlspecialchars($_SESSION['user']['id']); ?>">Мои ставки</a>
                     <a class="user-menu__logout" href="logout.php">Выход</a>
                 </div>
             <?php else: ?>
@@ -57,7 +57,7 @@
             <!--заполните этот список из массива категорий-->
             <?php foreach ($category_list as $key => $item): ?>
                 <li class="nav__item <?=$item['name'] === $category_name ? "nav__item--current" : "";?>">
-                    <a href="category.php?id=<?=$item['id'];?>"><?=$item['name'];?></a>
+                    <a href="category.php?id=<?=htmlspecialchars($item['id']);?>"><?=$item['name'];?></a>
                 </li>
             <?php endforeach; ?>
         </ul>

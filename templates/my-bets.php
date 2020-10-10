@@ -3,7 +3,7 @@
     <ul class="nav__list container">
       <?php foreach ($category as $key => $item): ?>
         <li class="nav__item">
-          <a href="category.php?id=<?=$item['id'];?>"><?=$item['name'];?></a>
+          <a href="category.php?id=<?=htmlspecialchars($item['id']);?>"><?=$item['name'];?></a>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -19,7 +19,7 @@
                 <img src="../<?=$bet['image'];?>" width="54" height="40" alt="Сноуборд">
               </div>
               <div>
-                <h3 class="rates__title"><a href="lot.php?id=<?=$bet['id'];?>"><?=$bet['lot_name'];?></a></h3>
+                <h3 class="rates__title"><a href="lot.php?id=<?=htmlspecialchars($bet['id']);?>"><?=$bet['lot_name'];?></a></h3>
                 <?php if ($bet['user_winner_id'] === $user_id ): ?>  
                   <p><?=$bet['user_contacts'];?></p>
                 <?php endif ?>

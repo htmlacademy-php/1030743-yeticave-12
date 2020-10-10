@@ -2,7 +2,7 @@
 require_once('helpers.php');
 require_once('functions.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $lot_id  = filter_input(INPUT_GET, 'id');
   $connection = connect_to_db();
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $page_content = include_template('404.php'); 
 };
 
-if ($_SESSION['user'] && $_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SESSION['user'] && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // параметр запроса из формы для обновления страницы
   $lot_id = $_POST['id'];
