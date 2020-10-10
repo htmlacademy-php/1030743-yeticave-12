@@ -8,7 +8,7 @@ if ($connection) {
   $category_list = category_list($connection);
 };
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
   // получения заголовка поискового запроса
   $search_headers = $_GET['search'] ?? '';

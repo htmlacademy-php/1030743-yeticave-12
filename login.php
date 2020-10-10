@@ -12,7 +12,7 @@ $page_content = include_template('sign-in.php', [
   'category' => $category_list
   ]); 
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form_data = $_POST;
   
     // валидация

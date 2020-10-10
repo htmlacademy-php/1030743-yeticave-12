@@ -3,7 +3,7 @@
     <ul class="nav__list container">
       <?php foreach ($category as $key => $item): ?>
         <li class="nav__item">
-          <a href="category.php?id=<?=$item['id'];?>"><?=$item['name'];?></a>
+          <a href="category.php?id=<?=htmlspecialchars($item['id']);?>"><?=$item['name'];?></a>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -42,8 +42,8 @@
           <form class="lot-item__form <?=isset($error) ? "form__item--invalid" : ""; ?>" action="lot.php" method="post" autocomplete="off">
             <p class="lot-item__form-item form__item ">
               <label for="cost">Ваша ставка</label>
-              <input id="cost" type="text" name="cost" placeholder="<?=$min_bet;?>">
-              <input id="id" type="hidden" name="id" value="<?=$lot_id;?>">
+              <input id="cost" type="text" name="cost" placeholder="<?=htmlspecialchars($min_bet);?>">
+              <input id="id" type="hidden" name="id" value="<?=htmlspecialchars($lot_id);?>">
               <span class="form__error"><?=$error;?></span>
             </p>
             <button type="submit" class="button">Сделать ставку</button>

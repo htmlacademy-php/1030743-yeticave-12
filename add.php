@@ -14,7 +14,7 @@ $page_content = include_template('add-lot.php', [
 
 if (isset($_SESSION['user'])) {
 // данные из формы
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form_data = $_POST;
 
     // валидация

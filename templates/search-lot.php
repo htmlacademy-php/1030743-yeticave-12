@@ -3,7 +3,7 @@
       <ul class="nav__list container">
         <?php foreach ($category as $key => $item): ?>
           <li class="nav__item">
-            <a href="category.php?id=<?=$item['id'];?>"><?=$item['name'];?></a>
+            <a href="category.php?id=<?=htmlspecialchars($item['id']);?>"><?=$item['name'];?></a>
           </li>
         <?php endforeach; ?>
       </ul>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="lot__info">
                   <span class="lot__category"><?=$lot['name'];?></span>
-                  <h3 class="lot__title"><a class="text-link" href="lot.php?id=<?=$lot['id'];?>"><?=$lot['lot_name'];?></a></h3>
+                  <h3 class="lot__title"><a class="text-link" href="lot.php?id=<?=htmlspecialchars($lot['id']);?>"><?=$lot['lot_name'];?></a></h3>
                   <div class="lot__state">
                     <div class="lot__rate">
                       <span class="lot__amount">Стартовая цена</span>
@@ -50,7 +50,7 @@
               <li class="pagination-item pagination-item-prev"><a>Назад</a></li>
             <?php endif ?>
               <?php foreach ($pages as $page): ?>
-                <?php if ($page == $cur_page): ?>
+                <?php if ($page === $cur_page): ?>
                   <li class="pagination-item pagination-item-active"><a><?=$page;?></a></li>
                 <?php else: ?>
                   <li class="pagination-item"><a href="search.php?search=<?=htmlspecialchars(strval($_GET['search'])); ?>&page=<?=$page;?>"><?=$page;?></a></li>
