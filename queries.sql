@@ -1,12 +1,12 @@
 -- добавляет данные в "лот"
 
 INSERT INTO lot (id, creation_date, lot_name, lot_description, image, start_price, end_date, bet_step, user_lot_add_id, user_winner_id, category_id) VALUES
-  (1, NOW(), '2014 Rossignol District Snowboard', 'Сноуборд сноубордический №1', 'img/lot-1.jpg', '10000', NOW() + INTERVAL 10 DAY, 500, 2, 2, 1),
-  (2, NOW(), 'DC Ply Mens 2016/2017 Snowboard', 'Сноуборд для сноубординга №2', 'img/lot-2.jpg', '15000', NOW() + INTERVAL 15 DAY, 500, 1, 1, 1),
-  (3, NOW(), 'Крепления Union Contact Pro 2015 года размер L/XL','крепление которое крепко крепит крепеж', 'img/lot-3.jpg', '8000', NOW() + INTERVAL 20 DAY, 500, 2, 2, 2),
-  (4, NOW(), 'Ботинки для сноуборда DC Mutiny Charocal','Ботинки сноубордические угольные ога', 'img/lot-4.jpg', '6700', NOW() + INTERVAL 25 DAY, 500, 1, 1, 3),
-  (5, NOW(), 'Куртка для сноуборда DC Mutiny Charocal','Куртка для сноубординга теплая не промакаемая', 'img/lot-5.jpg', '7500', NOW() + INTERVAL 30 DAY, 500, 2, 2, 4),
-  (6, NOW(), 'Маска Oakley Canopy', 'Маска для лица головы на шее', 'img/lot-6.jpg', '5400', NOW() + INTERVAL 35 DAY, 500, 1, 1, 6);
+  (1, NOW(), '2014 Rossignol District Snowboard', 'Сноуборд сноубордический №1', 'img/lot-1.jpg', '10000', NOW() + INTERVAL 1 DAY, 500, 2, 2, 1),
+  (2, NOW(), 'DC Ply Mens 2016/2017 Snowboard', 'Сноуборд для сноубординга №2', 'img/lot-2.jpg', '15000', NOW() + INTERVAL 2 DAY, 500, 1, 1, 1),
+  (3, NOW(), 'Крепления Union Contact Pro 2015 года размер L/XL','крепление которое крепко крепит крепеж', 'img/lot-3.jpg', '8000', NOW() + INTERVAL 3 DAY, 500, 2, 2, 2),
+  (4, NOW(), 'Ботинки для сноуборда DC Mutiny Charocal','Ботинки сноубордические угольные ога', 'img/lot-4.jpg', '6700', NOW() + INTERVAL 1 DAY, 500, 1, 1, 3),
+  (5, NOW(), 'Куртка для сноуборда DC Mutiny Charocal','Куртка для сноубординга теплая не промакаемая', 'img/lot-5.jpg', '7500', NOW() + INTERVAL 6 DAY, 500, 2, 2, 4),
+  (6, NOW(), 'Маска Oakley Canopy', 'Маска для лица головы на шее', 'img/lot-6.jpg', '5400', NOW() + INTERVAL 2 DAY, 500, 1, 1, 6);
 
 -- добавляет данные в "категрории"
 
@@ -28,9 +28,9 @@ INSERT INTO users (id, email, name, password, user_contacts) VALUES
 -- добавляет данные в "ставку"
 
 INSERT INTO bet (id, creation_date, bet_price, user_id, lot_id) VALUES
-  (1, NOW(), '1000', 1, 3),
-  (2, NOW(), '1500', 3, 2),
-  (3, NOW(), '800', 2, 5);
+  (1, NOW(), '8500', 1, 3),
+  (2, NOW(), '15500', 3, 2),
+  (3, NOW(), '8000', 2, 5);
 
 -- получить все категории;
 
