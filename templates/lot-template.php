@@ -19,8 +19,8 @@
         <p class="lot-item__description"><?=$lot['lot_description'];?></p>
       </div>
       <div class="lot-item__right">
-        <?php if (isset($_SESSION['user']) && (isset($_SESSION['user']['name']) !== $user_name_lot_add)
-         && ($current_time < $lot_end_date) && (isset($_SESSION['user']['name']) !== isset($bets[0]['name']))): ?>
+        <?php if (isset($_SESSION['user']) && ($_SESSION['user']['name'] !== $user_name_lot_add)
+         && ($current_time < $lot_end_date) && ($_SESSION['user']['name'] !== $bets[0]['name'])): ?>
           <div class="lot-item__state">
             <?php if (get_time_left($lot['end_date'])[0] < 1): ?>
               <div class="lot-item__timer timer timer--finishing">

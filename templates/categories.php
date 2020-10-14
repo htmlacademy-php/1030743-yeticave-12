@@ -9,7 +9,7 @@
       </ul>
     </nav>
     <div class="container">
-      <?php if (isset($lots)): ?>
+      <?php if ($lots): ?>
         <section class="lots">
           <h2>Все лоты в категории «<span><?=$category_name;?></span>»</h2>
           <ul class="lots__list">
