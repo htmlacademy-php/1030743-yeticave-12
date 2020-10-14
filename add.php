@@ -3,10 +3,9 @@ require_once('helpers.php');
 require_once('functions.php');
 
 $connection = connect_to_db();
-
-if ($connection) {
-  $category_list = category_list($connection);
-};
+$category_list = category_list($connection);
+$required_fields = ['lot-name', 'category', 'message', 'lot-rate', 'lot-step', 'lot-date'];
+$errors = [];
 
 $page_content = include_template('add-lot.php', [
   'category' => $category_list
@@ -18,9 +17,6 @@ if (isset($_SESSION['user'])) {
     $form_data = $_POST;
 
     // валидация
-    $required_fields = ['lot-name', 'category', 'message', 'lot-rate', 'lot-step', 'lot-date'];
-    $errors = [];
-    
     // проверяет поле на заполненность
     foreach ($required_fields as $field) {
       if (empty($_POST[$field])) {

@@ -2,28 +2,26 @@
 require_once('helpers.php');
 require_once('functions.php');
 
+$connection = connect_to_db();
+$category_list = category_list($connection);
+
+$page_content = include_template('lot-template.php', [
+  'category_list' => $category_list
+]); 
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $lot_id  = filter_input(INPUT_GET, 'id');
-  $connection = connect_to_db();
-
+  
   // запрос в бд
-  if ($connection) {
-    $category_list = category_list($connection);
-    $lot_description_list = sql_lot_description_list($connection, $lot_id);
-    $bets = bets($connection, $lot_id);
+  $lot_description_list = sql_lot_description_list($connection, $lot_id);
+  $bets = bets($connection, $lot_id);
 
-    $user_name_lot_add = $lot_description_list['user_name'];
-    $bet_step = $lot_description_list['bet_step'];
-    $lot_end_date = strtotime($lot_description_list['end_date']);
- 
-    if (($bets['0']['bet_price'] + $bet_step) > $lot_description_list['start_price']) {
-      $lot_price = $bets['0']['bet_price'];
-    } else {
-      $lot_price = $lot_description_list['start_price'];
-    }
+  $user_name_lot_add = $lot_description_list['user_name'];
+  $bet_step = $lot_description_list['bet_step'];
+  $lot_end_date = strtotime($lot_description_list['end_date']);
 
-    $min_bet = $lot_price + $bet_step;
-  };
+  $lot_price = lot_price_calculation($bets['0']['bet_price'], $bet_step, $lot_description_list['start_price']);
+  $min_bet = min_bet_calculation ($lot_price, $bet_step);
   
   if ($lot_id === $lot_description_list['id']) {
     $page_content = include_template('lot-template.php', [
@@ -38,36 +36,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       'bets' => $bets
       ]); 
   } 
-} else {
-  $page_content = include_template('404.php'); 
 };
 
 if ($_SESSION['user'] && $_SERVER['REQUEST_METHOD'] === 'POST') {
-
   // параметр запроса из формы для обновления страницы
   $lot_id = $_POST['id'];
   $user_id = $_SESSION['user']['id'];
-  $connection = connect_to_db();
   
   // запросы в бд
-  if ($connection) {
-    $category_list = category_list($connection);
-    $lot_description_list = sql_lot_description_list($connection, $lot_id);
-    $bets = bets ($connection, $lot_id);
-  };
+  $lot_description_list = sql_lot_description_list($connection, $lot_id);
+  $bets = bets ($connection, $lot_id);
 
   $bet = $_POST['cost'];
   $bet_step = $lot_description_list['bet_step'];
   $user_name_lot_add = $lot_description_list['user_name'];
   $lot_end_date = strtotime($lot_description_list['end_date']);
 
-  if (($bets['0']['bet_price'] + $bet_step) > $lot_description_list['start_price']) {
-    $lot_price = $bets['0']['bet_price'];
-  } else {
-    $lot_price = $lot_description_list['start_price'];
-  }
-
-  $min_bet = $lot_price + $bet_step;
+  $lot_price = lot_price_calculation($bets['0']['bet_price'], $bet_step, $lot_description_list['start_price']);
+  $min_bet = min_bet_calculation ($lot_price, $bet_step);
 
   // валидация
   if (empty($_POST['cost'])) {
@@ -87,7 +73,9 @@ if ($_SESSION['user'] && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_stmt_execute($stmt);
 
     if ($result) {
-      header('Location: user-bets.php?id=' . $user_id);
+      header('Location: lot.php?id=' . $lot_id);
+    } else {
+      print(mysqli_error($connection));
     }
   }
 
@@ -105,7 +93,7 @@ if ($_SESSION['user'] && $_SERVER['REQUEST_METHOD'] === 'POST') {
       'error' => $error
       ]); 
   } 
-}
+};
 
 $layout = include_template('layout.php', [
   'page_content' => $page_content,

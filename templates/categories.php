@@ -65,7 +65,7 @@
         <?php endif ?>
         <?php else: ?>
           <section class="lots">
-            <h2>По вашему запросу «<span><?=$category_name;?></span>» ничего не найдено</h2>
+            <h2>В данной категории нет активных лотов</h2>
         <?php endif ?>
     </div>
  

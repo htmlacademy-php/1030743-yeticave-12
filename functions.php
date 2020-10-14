@@ -136,6 +136,33 @@ function get_creation_date ($creation_date) {
   }
 
 /**
+ * Проверяет были ли ставки на лот для сценария lot.php
+ * @param string $bet_price цена лота с учетом ставок  
+ * @param string $bet_step шаг аукциона
+ * @param string $start_price начальная цена
+ *
+ * @return возращает цену лота с учетом ставки, если ставок не было возвращает начальную цену
+ */
+function lot_price_calculation ($bet_price, $bet_step, $start_price) {
+  if (($bet_price + $bet_step) > $start_price) {
+    return $bet_price;
+  } else {
+    return $start_price;
+  }
+}
+
+/**
+ * Расчитывает минимальную ставку лота для сценария lot.php
+ * @param string $lot_price текущая цена лота
+ * @param string $bet_step шаг аукциона
+ *
+ * @return возращает минимально возможную ставку
+ */
+function min_bet_calculation ($lot_price, $bet_step) {
+  return $lot_price + $bet_step;
+}
+
+/**
  * запрос в БД для описания лота для сценария lot.php
  * @param $connection ресурс соединения с БД
  * @param string $lot_id номер лота  

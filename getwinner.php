@@ -5,19 +5,17 @@ require_once('vendor/autoload.php');
 
 $connection = connect_to_db();
 
-if ($connection) {
-  $sql_winners = 'SELECT lot.id, lot_name, user_winner_id, end_date, bet.lot_id, max_bet_price, user_id, bets.user_id, email, name FROM lot 
-  JOIN (SELECT MAX(bet_price) as max_bet_price, lot_id FROM bet GROUP BY lot_id) bet
-  ON bet.lot_id = lot.id
-  JOIN bet as bets
-  ON bets.lot_id = lot.id AND max_bet_price = bet_price
-  JOIN users 
-  ON users.id = bets.user_id
-  WHERE end_date <= NOW() AND user_winner_id IS NULL';
+$sql_winners = 'SELECT lot.id, lot_name, user_winner_id, end_date, bet.lot_id, max_bet_price, user_id, bets.user_id, email, name FROM lot 
+JOIN (SELECT MAX(bet_price) as max_bet_price, lot_id FROM bet GROUP BY lot_id) bet
+ON bet.lot_id = lot.id
+JOIN bet as bets
+ON bets.lot_id = lot.id AND max_bet_price = bet_price
+JOIN users 
+ON users.id = bets.user_id
+WHERE end_date <= NOW() AND user_winner_id IS NULL';
 
-  $result_sql_winners = mysqli_query($connection, $sql_winners);
-  $winners = mysqli_fetch_all($result_sql_winners, MYSQLI_ASSOC);
-}; 
+$result_sql_winners = mysqli_query($connection, $sql_winners);
+$winners = mysqli_fetch_all($result_sql_winners, MYSQLI_ASSOC);
 
 $host = $_SERVER['HTTP_HOST'];
 
