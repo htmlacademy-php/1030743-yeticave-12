@@ -29,7 +29,7 @@
                     </h3>
                     <div class="lot__state">
                         <div class="lot__rate">
-                            <?php if ($item['bet_price']): ?>
+                            <?php if (isset($item['bet_price'])): ?>
                                 <span class="lot__amount"><?=$item['bet_count'];?> <?=get_noun_plural_form($item['bet_count'], 'ставка', 'ставки', 'ставок');?></span>
                                 <span class="lot__cost"><?= bet_formatter($item['bet_price']) ?></span>  
 
