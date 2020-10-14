@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   } 
 };
 
-if ($_SESSION['user'] && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
   // параметр запроса из формы для обновления страницы
   $lot_id = $_POST['id'];
   $user_id = $_SESSION['user']['id'];
