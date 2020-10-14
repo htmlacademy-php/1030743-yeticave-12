@@ -11,7 +11,6 @@
     <div class="container">
       <?php if ($lots): ?>
         <section class="lots">
-          
           <h2>Результаты поиска по запросу «<span><?=$search_headers;?></span>»</h2>
           <ul class="lots__list">
             <?php foreach ($lots as $key => $lot): ?>
@@ -63,9 +62,14 @@
             <?php endif ?>
           </ul>
         <?php endif ?>
+        <?php elseif ($lots === false): ?>
+          <section class="lots">
+            <h2>Введите название или описание лота</h2>
+          </section>
         <?php else: ?>
           <section class="lots">
             <h2>По вашему запросу «<span><?=$search_headers;?></span>» ничего не найдено</h2>
+          </section>
         <?php endif ?>
     </div>
  
