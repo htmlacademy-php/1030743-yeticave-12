@@ -5,6 +5,10 @@ require_once('functions.php');
 $connection = connect_to_db();
 $category_list = category_list($connection);
 
+$page_content = include_template('categories.php', [
+    'category' => $category_list
+]);
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // получения заголовка категории
     $category_headers = $_GET['id'] ?? '';
@@ -20,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt = db_get_prepare_stmt($connection, $sql_category_lots, [$category_headers]);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-    
+
     // количество найденных лотов
     $lot_count = mysqli_num_rows($result);
 
@@ -28,39 +32,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $pages_count = ceil($lot_count / $page_items_limit);
     $offset = ($cur_page - 1) * $page_items_limit;
     $pages = range(1, $pages_count);
-  
+
     // запрос в бд для получения количества найденных лотов со смещением
     if ($category_headers) {
-      $sql_category_lots = "SELECT lot.id, lot_name, start_price, end_date, category_id, image, category.name, category.character_code FROM lot
+        $sql_category_lots = "SELECT lot.id, lot_name, start_price, end_date, category_id, image, category.name, category.character_code FROM lot
       JOIN category ON lot.category_id = category.id 
       WHERE end_date > NOW() AND category.id = (?)
       LIMIT $page_items_limit OFFSET $offset";
-      $stmt = db_get_prepare_stmt($connection, $sql_category_lots, [$category_headers]);
-      mysqli_stmt_execute($stmt);
-      $result = mysqli_stmt_get_result($stmt);
-      $category_lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
-      $category_name = $category_lots['0']['name'];
+        $stmt = db_get_prepare_stmt($connection, $sql_category_lots, [$category_headers]);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $category_lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $category_name = $category_lots['0']['name'];
 
-      $page_content = include_template('categories.php', [
-        'category' => $category_list,
-        'lots' => $category_lots,
-        'cur_page' => $cur_page,
-        'pages_count' => $pages_count,
-        'pages' => $pages,
-        'category_name' => $category_name
-        ]); 
+        $page_content = include_template('categories.php', [
+            'category' => $category_list,
+            'lots' => $category_lots,
+            'cur_page' => $cur_page,
+            'pages_count' => $pages_count,
+            'pages' => $pages,
+            'category_name' => $category_name
+        ]);
     }
 } else {
-  $page_content = include_template('404.php', [
-    'category' => $category_list
-    ]); 
+    $page_content = include_template('404.php', [
+        'category' => $category_list
+    ]);
 }
 
 $layout = include_template('layout.php', [
-  'page_content' => $page_content,
-  'category_list' => $category_list,
-  'category_name' => $category_name,
-  'page_title' => 'Лоты по категориям'
+    'page_content' => $page_content,
+    'category_list' => $category_list,
+    'page_title' => 'Лоты по категориям'
 ]);
 
 print($layout);

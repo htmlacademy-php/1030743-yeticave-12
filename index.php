@@ -6,7 +6,8 @@ require_once('vendor/autoload.php');
 
 $connection = connect_to_db();
 
-$sql_new_lots = 'SELECT lot.id, lot_name, start_price, end_date, category_id, category.name, image, bet.lot_id, bet_price, bet_count
+$sql_new_lots = 'SELECT lot.id, lot_name, start_price, end_date, category_id, 
+category.name, image, bet.lot_id, bet_price, bet_count
 FROM lot 
 JOIN category ON lot.category_id = category.id 
 LEFT JOIN (SELECT lot_id, MAX(bet_price) as bet_price, COUNT(lot_id) as bet_count FROM bet GROUP BY lot_id) bet 
@@ -20,14 +21,14 @@ $new_lots = mysqli_fetch_all($result_new_lots, MYSQLI_ASSOC);
 $category_list = category_list($connection);
 
 $page_content = include_template('main.php', [
-  'category_list' => $category_list,
-  'new_lots' => $new_lots
-]); 
+    'category_list' => $category_list,
+    'new_lots' => $new_lots
+]);
 
 $layout = include_template('layout.php', [
-  'page_content' => $page_content,
-  'category_list' => $category_list,
-  'page_title' => 'Yeti Cave'
+    'page_content' => $page_content,
+    'category_list' => $category_list,
+    'page_title' => 'Yeti Cave'
 ]);
 
 print($layout);
