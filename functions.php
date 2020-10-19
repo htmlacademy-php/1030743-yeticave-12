@@ -15,8 +15,6 @@ function bet_formatter($bet)
     return number_format($bet, '0', ',', ' ') . ' ₽';
 }
 
-;
-
 /**
  * Показывает оставшееся время до окончания аукциона часы минуты
  *
@@ -43,8 +41,6 @@ function get_time_left($time_end)
     return [$hours_until_end, $minutes_until_end];
 }
 
-;
-
 /**
  * Рэндэрит время показа лота из массива полученного их функции get_time_left
  *
@@ -56,8 +52,6 @@ function show_time_left($time)
 {
     return $time[0] . ':' . $time[1];
 }
-
-;
 
 /**
  * Ресурс соединения с БД
@@ -73,8 +67,6 @@ function connect_to_db()
 
     return $connection;
 }
-
-;
 
 /**
  * Проверяет количество оствашегося времени до окончания аукциона.
@@ -95,8 +87,6 @@ function is_time_left_24($current_time)
     return true;
 }
 
-;
-
 /**
  * Запрос в БД для получения списка категорий
  * @param $connection ресурс соединения с БД
@@ -109,8 +99,6 @@ function category_list($connection)
     $result_category_list = mysqli_query($connection, $sql_category_list);
     return mysqli_fetch_all($result_category_list, MYSQLI_ASSOC);
 }
-
-;
 
 /**
  * Расчитывает сколько времени прошло с момента создания ставки
