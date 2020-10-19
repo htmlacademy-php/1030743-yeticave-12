@@ -187,6 +187,7 @@ function check_array_key($value)
     if (isset($value)) {
         return $value;
     }
+    return null;
 }
 
 
