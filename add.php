@@ -6,6 +6,7 @@ $connection = connect_to_db();
 $category_list = category_list($connection);
 $required_fields = ['lot-name', 'category', 'message', 'lot-rate', 'lot-step', 'lot-date'];
 $errors = [];
+$form_data = [];
 
 $page_content = include_template('add-lot.php', [
     'category' => $category_list
@@ -90,7 +91,9 @@ if (isset($_SESSION['user'])) {
     }
 } else {
     $page_content = include_template('403.php', [
-        'category' => $category_list
+        'category' => $category_list,
+        'errors' => $errors,
+        'form_data' => $form_data
     ]);
 }
 

@@ -26,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $lot_description_list = sql_lot_description_list($connection, $lot_id);
     $bets = bets($connection, $lot_id);
 
-    $user_name_lot_add = check_array_key($lot_description_list['user_name']);
-    $bet_step = check_array_key($lot_description_list['bet_step']);
-    $lot_end_date = check_array_key(strtotime($lot_description_list['end_date']));
-    $bet_price = check_array_key($bets['0']['bet_price']);
-    $start_price = check_array_key($lot_description_list['start_price']);
-    $lot_description_id = check_array_key($lot_description_list['id']);
+    $user_name_lot_add = check_array_key($lot_description_list, 'user_name', false);
+    $bet_step = check_array_key($lot_description_list, 'bet_step', false);
+    $lot_end_date = check_array_key($lot_description_list, 'end_date', true);
+    $bet_price = check_array_key($bets['0'], 'bet_price', false);
+    $start_price = check_array_key($lot_description_list, 'start_price', false);
+    $lot_description_id = check_array_key($lot_description_list, 'id', false);
 
     $lot_price = lot_price_calculation($bet_price, $bet_step, $start_price);
     $min_bet = min_bet_calculation($lot_price, $bet_step);
@@ -53,19 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 if (isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // параметр запроса из формы для обновления страницы
-    $lot_id = check_array_key($_POST['id']);
-    $user_id = check_array_key($_SESSION['user']['id']);
+    $lot_id = check_array_key($_POST, 'id', false);
+    $user_id = check_array_key($_SESSION['user'], 'id', false);
 
     // запросы в бд
     $lot_description_list = sql_lot_description_list($connection, $lot_id);
     $bets = bets($connection, $lot_id);
 
-    $user_name_lot_add = check_array_key($lot_description_list['user_name']);
-    $bet_step = check_array_key($lot_description_list['bet_step']);
-    $lot_end_date = check_array_key(strtotime($lot_description_list['end_date']));
-    $bet = check_array_key($_POST['cost']);
-    $bet_price = check_array_key($bets['0']['bet_price']);
-    $lot_description_id = check_array_key($lot_description_list['id']);
+    $user_name_lot_add = check_array_key($lot_description_list, 'user_name', false);
+    $bet_step = check_array_key($lot_description_list, 'bet_step', false);
+    $lot_end_date = check_array_key($lot_description_list, 'end_date', true);
+    $bet = check_array_key($_POST, 'cost', false);
+    $bet_price = check_array_key($bets['0'], 'bet_price', false);
+    $lot_description_id = check_array_key($lot_description_list, 'id', false);
     $lot_price = lot_price_calculation($bet_price, $bet_step, $start_price);
     $min_bet = min_bet_calculation($lot_price, $bet_step);
 

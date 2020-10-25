@@ -18,8 +18,8 @@
                 <!-- form__item--invalid -->
                 <label for="lot-name">Наименование <sup>*</sup></label>
                 <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота"
-                       value="<?= htmlspecialchars($form_data['lot-name']) ?>">
-                <span class="form__error"><?= $errors['lot-name'] ?></span>
+                       value="<?= isset($form_data['lot-name']) ? htmlspecialchars($form_data['lot-name']) : "" ?>">
+                <span class="form__error"><?= isset($errors['lot-name']) ? $errors['lot-name']  : "" ?></span>
             </div>
             <div class="form__item <?= isset($errors['category']) ? "form__item--invalid" : ""; ?> ">
                 <label for="category">Категория <sup>*</sup></label>
@@ -33,14 +33,14 @@
                         <?php endif ?>
                     <?php endforeach; ?>
                 </select>
-                <span class="form__error"><?= $errors['category'] ?></span>
+                <span class="form__error"><?=isset($errors['category']) ? $errors['category'] : "" ?></span>
             </div>
         </div>
         <div class="form__item form__item--wide <?= isset($errors['message']) ? "form__item--invalid" : ""; ?> ">
             <label for="message">Описание <sup>*</sup></label>
             <textarea id="message" name="message"
-                      placeholder="Напишите описание лота"><?= htmlspecialchars($form_data['message']) ?></textarea>
-            <span class="form__error"><?= $errors['message'] ?></span>
+                      placeholder="Напишите описание лота"><?= isset($form_data['message']) ? htmlspecialchars($form_data['message']) : "" ?></textarea>
+            <span class="form__error"><?= isset($errors['message']) ? htmlspecialchars($errors['message']) : ""  ?></span>
         </div>
         <div class="form__item form__item--file <?= isset($errors['picture']) ? "form__item--invalid" : ""; ?>">
             <label>Изображение <sup>*</sup></label>
@@ -49,28 +49,28 @@
                 <label for="lot-img">
                     Добавить
                 </label>
-                <span class="form__error"><?= $errors['picture'] ?></span>
+                <span class="form__error"><?= isset($errors['picture']) ? $errors['picture'] : "" ?></span>
             </div>
         </div>
         <div class="form__container-three">
             <div class="form__item form__item--small <?= isset($errors['lot-rate']) ? "form__item--invalid" : ""; ?>">
                 <label for="lot-rate">Начальная цена <sup>*</sup></label>
                 <input id="lot-rate" type="text" name="lot-rate" placeholder="0"
-                       value="<?= htmlspecialchars($form_data['lot-rate']) ?>">
-                <span class="form__error"><?= $errors['lot-rate'] ?></span>
+                       value="<?= isset($form_data['lot-rate']) ? htmlspecialchars($form_data['lot-rate']) : "" ?>">
+                <span class="form__error"><?= isset($errors['lot-rate']) ? $errors['lot-rate'] : "" ?></span>
             </div>
             <div class="form__item form__item--small <?= isset($errors['lot-step']) ? "form__item--invalid" : ""; ?>">
                 <label for="lot-step">Шаг ставки <sup>*</sup></label>
                 <input id="lot-step" type="text" name="lot-step" placeholder="0"
-                       value="<?= htmlspecialchars($form_data['lot-step']) ?>">
-                <span class="form__error"><?= $errors['lot-step'] ?></span>
+                       value="<?= isset($form_data['lot-step']) ? htmlspecialchars($form_data['lot-step']) : "" ?>">
+                <span class="form__error"><?= isset($errors['lot-step']) ? $errors['lot-step'] : "" ?></span>
             </div>
             <div class="form__item <?= isset($errors['lot-date']) ? "form__item--invalid" : ""; ?>">
                 <label for="lot-date">Дата окончания торгов <sup>*</sup></label>
                 <input class="form__input-date" id="lot-date" type="text" name="lot-date"
                        placeholder="Введите дату в формате ГГГГ-ММ-ДД"
-                       value="<?= htmlspecialchars($form_data['lot-date']) ?>">
-                <span class="form__error"><?= $errors['lot-date'] ?></span>
+                       value="<?= isset($form_data['lot-date']) ? htmlspecialchars($form_data['lot-date']) : "" ?>">
+                <span class="form__error"><?= isset($errors['lot-date']) ? $errors['lot-date'] : "" ?></span>
             </div>
         </div>
         <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>

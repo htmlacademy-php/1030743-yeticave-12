@@ -14,13 +14,13 @@
         <?php if (isset($lots)): ?>
             <?php if ($lots): ?>
                 <section class="lots">
-                    <h2>Результаты поиска по запросу «<span><?= $search_headers; ?></span>»</h2>
+                    <h2>Результаты поиска по запросу «<span><?= htmlspecialchars($search_headers); ?></span>»</h2>
                     <ul class="lots__list">
                         <?php foreach ($lots as $key => $lot): ?>
                             <li class="lots__item lot">
                                 <div class="lot__image">
                                     <img src="../<?= $lot['image']; ?>" width="350" height="260"
-                                         alt="<?= $lot['lot_description']; ?>">
+                                         alt="<?= htmlspecialchars($lot['lot_description']); ?>">
                                 </div>
                                 <div class="lot__info">
                                     <span class="lot__category"><?= $lot['name']; ?></span>
@@ -30,7 +30,7 @@
                                     <div class="lot__state">
                                         <div class="lot__rate">
                                             <span class="lot__amount">Стартовая цена</span>
-                                            <span class="lot__cost"><?= $lot['start_price']; ?><b
+                                            <span class="lot__cost"><?= htmlspecialchars($lot['start_price']); ?><b
                                                         class="rub">р</b></span>
                                         </div>
                                         <?php if (get_time_left($lot['end_date'])[0] < 1): ?>
