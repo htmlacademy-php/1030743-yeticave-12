@@ -1,9 +1,10 @@
 <?php
-require_once('helpers.php');
 require_once('functions.php');
+require_once('helpers.php');
 require_once('getwinner.php');
 require_once('vendor/autoload.php');
 
+session_start();
 $connection = connect_to_db();
 
 $sql_new_lots = 'SELECT lot.id, lot_name, start_price, end_date, category_id, 
@@ -32,5 +33,3 @@ $layout = include_template('layout.php', [
 ]);
 
 print($layout);
-
-

@@ -1,6 +1,6 @@
 <?php
-require_once('helpers.php');
 require_once('functions.php');
+require_once('helpers.php');
 
 $connection = connect_to_db();
 $category_list = category_list($connection);
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!count($errors) && $user) {
             session_start();
             $_SESSION['user'] = $user;
-            header('Location: index.php');
+            header('Location: /index.php');
         }
     }
 
@@ -70,11 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'form_data' => $form_data
         ]);
     } elseif (isset($_SESSION['user'])) {
-        header("Location: index.php");
+        header("Location: /index.php");
         exit();
     }
 } elseif (isset($_SESSION['user'])) {
-    header("Location: index.php");
+    header("Location: /index.php");
     exit();
 }
 

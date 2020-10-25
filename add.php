@@ -2,6 +2,7 @@
 require_once('helpers.php');
 require_once('functions.php');
 
+session_start();
 $connection = connect_to_db();
 $category_list = category_list($connection);
 $required_fields = ['lot-name', 'category', 'message', 'lot-rate', 'lot-step', 'lot-date'];
@@ -27,8 +28,8 @@ if (isset($_SESSION['user'])) {
 
         // валидация загруженного файла
         if ($_FILES['picture']['name']) {
-            $tmp_name = $_FILES['picture']['tmp_name'];
-            $filename = uniqid() . $_FILES['picture']['name'];
+            $tmp_name = check_array_key($_FILES['picture'], 'tmp_name');
+            $filename = uniqid() . check_array_key($_FILES['picture'], 'name');
             $form_data['path'] = 'uploads/' . $filename;
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $file_type = finfo_file($finfo, $tmp_name);
@@ -68,11 +69,12 @@ if (isset($_SESSION['user'])) {
         };
 
         if (!count($errors)) {
-            $current_user_id = $_SESSION['user']['id'];
+            $current_user_id = check_array_key($_SESSION['user'], 'id');
             $form_data['user_lot_add_id'] = $current_user_id;
 
             // подготовленное выражение для вставки в бд
-            $sql_add_to_db = 'INSERT INTO lot (creation_date, lot_name, category_id, lot_description, start_price, bet_step, end_date, image, user_lot_add_id) 
+            $sql_add_to_db = 'INSERT INTO lot (creation_date, lot_name, category_id, lot_description, start_price, 
+            bet_step, end_date, image, user_lot_add_id) 
             VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?)';
             $stmt = db_get_prepare_stmt($connection, $sql_add_to_db, $form_data);
             $result = mysqli_stmt_execute($stmt);

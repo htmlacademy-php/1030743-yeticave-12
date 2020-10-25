@@ -1,6 +1,5 @@
 <?php
 require_once('helpers.php');
-session_start();
 
 /**
  * Форматирует ставку, путем деления числа на разряды, если число больше 1000
@@ -172,12 +171,9 @@ function min_bet_calculation($lot_price, $bet_step)
  *
  * @return возращает значение из массива
  */
-function check_array_key($array, $value, $time) 
+function check_array_key($array, $value) 
 {
     if (isset($array[$value])) {
-        if ($time) {
-            return strtotime($array[$value]);
-        }
         return $array[$value];
     }
     return null;
@@ -194,11 +190,11 @@ function check_array_key($array, $value, $time)
 function sql_lot_description_list($connection, $lot_id)
 {
     $sql_lot_description_list = 'SELECT lot.id, lot_name, image, lot_description, start_price, end_date, bet_step,
-  users.name as user_name, category.name, COUNT(bet.lot_id) as bet_count  FROM lot
-  JOIN users ON user_lot_add_id = users.id
-  JOIN category ON lot.category_id = category.id 
-  JOIN bet ON bet.lot_id = lot.id
-  WHERE lot.id = ' . $lot_id;
+    users.name as user_name, category.name, COUNT(bet.lot_id) as bet_count  FROM lot
+    JOIN users ON user_lot_add_id = users.id
+    JOIN category ON lot.category_id = category.id 
+    JOIN bet ON bet.lot_id = lot.id
+    WHERE lot.id = ' . $lot_id;
     $result_sql_lot_description_list = mysqli_query($connection, $sql_lot_description_list);
     return mysqli_fetch_assoc($result_sql_lot_description_list);
 }
@@ -215,9 +211,9 @@ function sql_lot_description_list($connection, $lot_id)
 function bets($connection, $lot_id)
 {
     $sql_bets = 'SELECT bet_price, creation_date, user_id, users.name  FROM bet 
-  JOIN users ON user_id = users.id
-  WHERE bet.lot_id = ' . $lot_id . '
-  ORDER BY creation_date DESC';
+    JOIN users ON user_id = users.id
+    WHERE bet.lot_id = ' . $lot_id . '
+    ORDER BY creation_date DESC';
     $result_bets = mysqli_query($connection, $sql_bets);
     return mysqli_fetch_all($result_bets, MYSQLI_ASSOC);
 }
