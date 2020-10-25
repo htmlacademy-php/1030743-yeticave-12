@@ -2,6 +2,7 @@
 require_once('helpers.php');
 require_once('functions.php');
 
+session_start();
 $connection = connect_to_db();
 $category_list = category_list($connection);
 

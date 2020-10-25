@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $page_title; ?></title>
+    <title><?= isset($page_title) ? $page_title : ""; ?></title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/flatpickr.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@
         </div>
     </header>
 
-    <?= $page_content; ?>
+    <?= isset($page_content) ? $page_content : ""; ?>
 
 </div>
 
@@ -59,9 +59,15 @@
             <!--заполните этот список из массива категорий-->
             <?php if (isset($category_list)) {
                 foreach ($category_list as $key => $item): ?>
-                    <li class="nav__item <?= $item['name'] === $category_name ? "nav__item--current" : ""; ?>">
-                        <a href="category.php?id=<?= htmlspecialchars($item['id']); ?>"><?= $item['name']; ?></a>
-                    </li>
+                    <?php if (isset($category_name)): ?>
+                        <li class="nav__item <?= $item['name'] === $category_name ? "nav__item--current" : ""; ?>">
+                            <a href="category.php?id=<?= htmlspecialchars($item['id']); ?>"><?= $item['name']; ?></a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav__item ">
+                            <a href="category.php?id=<?= htmlspecialchars($item['id']); ?>"><?= $item['name']; ?></a>
+                        </li>
+                    <?php endif ?>
                 <?php endforeach;
             } ?>
         </ul>

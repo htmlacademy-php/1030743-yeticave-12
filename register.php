@@ -1,7 +1,8 @@
 <?php
-require_once('helpers.php');
 require_once('functions.php');
+require_once('helpers.php');
 
+session_start();
 $connection = connect_to_db();
 $category_list = category_list($connection);
 
@@ -10,7 +11,6 @@ $page_content = include_template('sign-up.php', [
 ]);
 
 if (!isset($_SESSION['user'])) {
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form_data = $_POST;
 
@@ -34,7 +34,7 @@ if (!isset($_SESSION['user'])) {
             $errors['email'] = 'Введите корректный email';
         };
 
-        if (!$errors['email'] && $connection) {
+        if (empty($errors['email']) && $connection) {
             $email = mysqli_real_escape_string($connection, $form_data['email']);
             $email_sql = "SELECT email FROM users WHERE email = '$email'";
             $email_result = mysqli_query($connection, $email_sql);
@@ -72,6 +72,7 @@ if (!isset($_SESSION['user'])) {
 
             if ($result) {
                 header('Location: login.php');
+                exit();
             }
         } else {
             $page_content = include_template('sign-up.php', [

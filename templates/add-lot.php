@@ -25,13 +25,19 @@
                 <label for="category">Категория <sup>*</sup></label>
                 <select id="category" name="category">
                     <option name='choose-category'>Выберите категорию</option>
-                    <?php foreach ($category as $key => $item): ?>
-                        <?php if ($item['id'] === $form_data['category']): ?>
-                            <option value='<?= $item['id']; ?>' <?= "selected" ?>><?= htmlspecialchars($item['name']); ?></option>
-                        <?php else: ?>
-                            <option value='<?= $item['id']; ?>'><?= htmlspecialchars($item['name']); ?></option>
-                        <?php endif ?>
-                    <?php endforeach; ?>
+                    <?php if (isset($category)): ?>
+                        <?php foreach ($category as $key => $item): ?>
+                            <?php if (isset($form_data['category'])): ?>
+                                <?php if ($item['id'] === $form_data['category']): ?>
+                                    <option value='<?= $item['id']; ?>' <?= "selected" ?>><?= htmlspecialchars($item['name']); ?></option>
+                                <?php else: ?>
+                                    <option value='<?= $item['id']; ?>'><?= htmlspecialchars($item['name']); ?></option>
+                                <?php endif ?>
+                            <?php else: ?>
+                                <option value='<?= $item['id']; ?>'><?= htmlspecialchars($item['name']); ?></option>
+                            <?php endif ?>
+                        <?php endforeach; ?>
+                    <?php endif ?>
                 </select>
                 <span class="form__error"><?=isset($errors['category']) ? $errors['category'] : "" ?></span>
             </div>

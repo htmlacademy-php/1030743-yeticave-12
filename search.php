@@ -2,6 +2,7 @@
 require_once('helpers.php');
 require_once('functions.php');
 
+session_start();
 $connection = connect_to_db();
 $category_list = category_list($connection);
 
@@ -10,17 +11,16 @@ $page_content = include_template('search-lot.php', [
 ]);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && strlen($_GET['search']) > 0) {
-
     // получения заголовка поискового запроса
-    $search_headers = $_GET['search'] ?? '';
+    $search_headers = check_array_key($_GET, 'search') ?? '';
 
-    $cur_page = $_GET['page'] ?? 1;
+    $cur_page = check_array_key($_GET, 'page') ?? 1;
     $page_items_limit = 9;
 
     // запрос в бд для получения количества найденных лотов
     $sql_lot_count = "SELECT * FROM lot
-  JOIN category ON lot.category_id = category.id 
-  WHERE end_date > NOW() AND MATCH (lot_name, lot_description) AGAINST(?)";
+    JOIN category ON lot.category_id = category.id 
+    WHERE end_date > NOW() AND MATCH (lot_name, lot_description) AGAINST(?)";
 
     $stmt = db_get_prepare_stmt($connection, $sql_lot_count, [$search_headers]);
     mysqli_stmt_execute($stmt);
@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && strlen($_GET['search']) > 0) {
     // запрос в бд для получения количества найденных лотов со смещением
     if ($lot_count) {
         $sql_search = "SELECT * FROM lot
-    WHERE end_date > NOW() AND MATCH (lot_name, lot_description) AGAINST(?)
-    ORDER BY creation_date DESC
-    LIMIT $page_items_limit OFFSET $offset";
+        WHERE end_date > NOW() AND MATCH (lot_name, lot_description) AGAINST(?)
+        ORDER BY creation_date DESC
+        LIMIT $page_items_limit OFFSET $offset";
         $stmt = db_get_prepare_stmt($connection, $sql_search, [$search_headers]);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
