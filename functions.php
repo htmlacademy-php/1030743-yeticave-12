@@ -166,14 +166,19 @@ function min_bet_calculation($lot_price, $bet_step)
 
 /**
  * Проверяет наличие ключа в массиве
- * @param string $value ключ в массиве вида $value['value']
+ * @param array массив
+ * @param arrayKey $value ключ в массиве вида ['value']
+ * @param $time boolean если надо получить время в формате unixtime
  *
- * @return возращает значение из массивв
+ * @return возращает значение из массива
  */
-function check_array_key($value) 
+function check_array_key($array, $value, $time) 
 {
-    if (isset($value)) {
-        return $value;
+    if (isset($array[$value])) {
+        if ($time) {
+            return strtotime($array[$value]);
+        }
+        return $array[$value];
     }
     return null;
 }
