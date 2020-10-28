@@ -4,9 +4,7 @@ require_once('helpers.php');
 /**
  * Форматирует ставку, путем деления числа на разряды, если число больше 1000
  * Добавляет знак ₽ в конце
- *
  * @param integer $bet Число
- *
  * @return string число разделенное на разряды
  */
 function bet_formatter($bet)
@@ -16,9 +14,7 @@ function bet_formatter($bet)
 
 /**
  * Показывает оставшееся время до окончания аукциона часы минуты
- *
  * @param string $time_end Дата окончания аукциона вида 2020-09-28 22:50:22
- *
  * @return array время до конца аукциона в виде массива
  */
 function get_time_left($time_end)
@@ -42,9 +38,7 @@ function get_time_left($time_end)
 
 /**
  * Рэндэрит время показа лота из массива полученного их функции get_time_left
- *
  * @param array $time Массив вида ['11', '24']
- *
  * @return string Время до окончания аукциона часы минуты
  */
 function show_time_left($time)
@@ -71,7 +65,6 @@ function connect_to_db()
  * Проверяет количество оствашегося времени до окончания аукциона.
  * Если меньше 24 часов, возвращает false, если больше true
  * @param string $current_time Дата вида 2020-09-28 22:50:22
- *
  * @return boolean
  */
 function is_time_left_24($current_time)
@@ -89,7 +82,6 @@ function is_time_left_24($current_time)
 /**
  * Запрос в БД для получения списка категорий
  * @param $connection ресурс соединения с БД
- *
  * @return возращает результат запроса в виде двумерного ассоциативного массива
  */
 function category_list($connection)
@@ -103,7 +95,6 @@ function category_list($connection)
  * Расчитывает сколько времени прошло с момента создания ставки
  * вида '5 минут назад, 2 часа назад'.
  * @param string $creation_date Дата вида 2020-09-28 22:50:22
- *
  * @return string Дата вида '5 минут назад, 2 часа назад, в 21:30'.
  */
 function get_creation_date($creation_date)
@@ -139,7 +130,6 @@ function get_creation_date($creation_date)
  * @param string $bet_price цена лота с учетом ставок
  * @param string $bet_step шаг аукциона
  * @param string $start_price начальная цена
- *
  * @return возращает цену лота с учетом ставки, если ставок не было возвращает начальную цену
  */
 function lot_price_calculation($bet_price, $bet_step, $start_price)
@@ -155,7 +145,6 @@ function lot_price_calculation($bet_price, $bet_step, $start_price)
  * Расчитывает минимальную ставку лота для сценария lot.php
  * @param string $lot_price текущая цена лота
  * @param string $bet_step шаг аукциона
- *
  * @return возращает минимально возможную ставку
  */
 function min_bet_calculation($lot_price, $bet_step)
@@ -168,7 +157,6 @@ function min_bet_calculation($lot_price, $bet_step)
  * @param array массив
  * @param arrayKey $value ключ в массиве вида ['value']
  * @param $time boolean если надо получить время в формате unixtime
- *
  * @return возращает значение из массива
  */
 function check_array_key($array, $value) 
@@ -184,7 +172,6 @@ function check_array_key($array, $value)
  * запрос в БД для описания лота для сценария lot.php
  * @param $connection ресурс соединения с БД
  * @param string $lot_id номер лота
- *
  * @return возращает результат запроса в виде двумерного ассоциативного массива
  */
 function sql_lot_description_list($connection, $lot_id)
@@ -205,7 +192,6 @@ function sql_lot_description_list($connection, $lot_id)
  * запрос в БД для получения ставок для сценария lot.php
  * @param $connection ресурс соединения с БД
  * @param string $lot_id номер лота
- *
  * @return возращает результат запроса в виде двумерного ассоциативного массива
  */
 function bets($connection, $lot_id)
