@@ -26,7 +26,7 @@
                         <li class="lots__item lot">
                             <div class="lot__image">
                                 <img src="../<?= $lot['image']; ?>" width="350" height="260"
-                                     alt="<?= $lot['lot_description']; ?>">
+                                     alt="">
                             </div>
                             <div class="lot__info">
                                 <span class="lot__category"><?= $lot['name']; ?></span>
