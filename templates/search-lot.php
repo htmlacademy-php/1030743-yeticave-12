@@ -88,7 +88,7 @@
             <?php endif; ?>
         <?php else: ?>
             <section class="lots">
-                <h2>По вашему запросу «<span><?= isset($search_headers) ? $search_headers : ""; ?></span>» ничего не найдено</h2>
+                <h2>По вашему запросу «<span><?= isset($search_headers) ? htmlspecialchars($search_headers) : ""; ?></span>» ничего не найдено</h2>
             </section>
         <?php endif ?>
     </div>
